@@ -88,7 +88,7 @@ function onImageLoaded() {
         console.log(`Image transitioned: ${imageIndex.value} -> ${nextImageIndex.value}`);
         imageIndex.value = nextImageIndex.value;
         isImageLoading.value = false;
-    }, 500);
+    }, 1000);
 }
 
 const image = computed(() => {
@@ -206,7 +206,7 @@ function updateCountdown() {
         > h2 {
             font-size: 5.2rem;
             text-shadow: 0.4rem 0.4rem 0 black;
-            line-height: 0.9;
+            line-height: 1;
         }
         > .description {
             align-items: flex-start;

@@ -22,5 +22,29 @@
     "author": "Hugo Sousa",
     "description": "Jardim do Torel, Lisbon",
     "commonColor": "#a32436"
+  },
+  {
+    "path": "assets/images/lisbon__tom-byrom.jpg",
+    "author": "Tom Byrom",
+    "description": "Lisbon",
+    "commonColor": "#d9773a"
+  },
+  {
+    "path": "assets/image/ponte-25-de-abril-lisbon__svetlana-gumerova.jpg",
+    "author": "Svetlana Gumerova",
+    "description": "Ponte 25 de Abril, Lisbon",
+    "commonColor": null
+  },
+  {
+    "path": "assets/images/agueda__ricardo-resende.jpg",
+    "author": "Ricardo Resende",
+    "description": "Águeda",
+    "commonColor": "#dc5f22"
+  },
+  {
+    "path": "assets/images/aveiro__ricardo-resende.jpg",
+    "author": "Ricardo Resende",
+    "description": "Aveiro",
+    "commonColor": "#1f9eba"
   }
 ]
