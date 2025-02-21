@@ -56,7 +56,7 @@ const month = day * 30;
 const timeRemaining = ref(-1);
 const monthsRemaining = computed(() => Math.max(Math.floor(timeRemaining.value / month), 0));
 const weeksRemaining = computed(() => Math.max(Math.floor((timeRemaining.value % month) / week), 0));
-const daysRemaining = computed(() => Math.max(Math.floor((timeRemaining.value % week) / day), 0));
+const daysRemaining = computed(() => Math.max(Math.floor(((timeRemaining.value % month) % week) / day), 0));
 const hoursRemaining = computed(() => Math.max(Math.floor((timeRemaining.value % day) / hour), 0));
 const minutesRemaining = computed(() => Math.max(Math.floor((timeRemaining.value % hour) / minute), 0));
 const secondsRemaining = computed(() => Math.max(Math.floor((timeRemaining.value % minute) / second), 0));
@@ -96,8 +96,7 @@ const image = computed(() => {
 });
 
 onMounted(() => {
-    // Every 0.05 seconds, update the countdown
-    interval.value = setInterval(updateCountdown, 50);
+    interval.value = setInterval(updateCountdown, 1000);
 });
 
 onUnmounted(() => {
