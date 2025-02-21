@@ -1,0 +1,26 @@
+[
+  {
+    "path": "assets/images/porto__nick-karvounis.jpg",
+    "author": "Nick Karvounis",
+    "description": "Porto",
+    "commonColor": "#04aceb"
+  },
+  {
+    "path": "assets/images/rossio-lisbon__vita-marija-murenaite.jpg",
+    "author": "Vita Marija Murenaite",
+    "description": "Rossio, Lisbon",
+    "commonColor": "#cc4952"
+  },
+  {
+    "path": "assets/images/pena-palace-sintra__julia-solonina.jpg",
+    "author": "Julia Solonina",
+    "description": "Pena Palace, Sintra",
+    "commonColor": "#dd8814"
+  },
+  {
+    "path": "assets/images/jardim-do-torel-lisbon__hugo-sousa.jpg",
+    "author": "Hugo Sousa",
+    "description": "Jardim do Torel, Lisbon",
+    "commonColor": "#a32436"
+  }
+]
