@@ -88,7 +88,7 @@ function onImageLoaded() {
         console.log(`Image transitioned: ${imageIndex.value} -> ${nextImageIndex.value}`);
         imageIndex.value = nextImageIndex.value;
         isImageLoading.value = false;
-    }, 1000);
+    }, 500);
 }
 
 const image = computed(() => {
@@ -115,7 +115,7 @@ function updateCountdown() {
 .hero {
     width: 100%;
     height: 100vh;
-    transition: background-color 1s;
+    transition: background-color 0.5s;
 
     position: relative;
 
@@ -149,7 +149,7 @@ function updateCountdown() {
             align-items: flex-end;
             justify-content: space-between;
             margin-top: auto;
-            transition: background-color 1s;
+            transition: background-color 0.5s;
 
             p {
                 font-size: 2rem;
