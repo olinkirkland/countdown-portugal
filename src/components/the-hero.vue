@@ -1,7 +1,7 @@
 <template>
-    <div class="hero" :style="{ backgroundColor: image.commonColor }">
+    <div class="hero" :style="{ backgroundColor: image.commonColor }" @click="chooseNewImage">
         <div class="hero-image">
-            <img :src="image.path" @load="imageIsLoading = false" :style="{ opacity: imageIsLoading ? 0 : 1 }" />
+            <img :src="image.path" @load="onImageLoaded" :style="{ top: isImageLoading ? '-100%' : '0' }" />
         </div>
         <div class="hero-text">
             <h2 class="months" :class="{ disabled: !monthsRemaining }">
@@ -25,8 +25,8 @@
             >
                 <span>{{ secondsRemaining }}</span> second{{ secondsRemaining !== 1 ? 's' : '' }}
             </h2>
-            <div class="description">
-                <p>until {{ dateString }}</p>
+            <div class="description" :style="{ backgroundColor: image.commonColor }">
+                <p>...until {{ dateString }}</p>
                 <p>
                     <em>{{ image.description }}</em> by {{ image.author }}
                 </p>
@@ -40,7 +40,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import imageLibrary from '../assets/image-library.json';
 
 const interval = ref(0);
-const imageIsLoading = ref(true);
+const isImageLoading = ref(true);
 
 // Target date: April 29th, 2025
 const targetDate = new Date('2025-04-29T00:00:00').getTime();
@@ -67,9 +67,32 @@ const dateString = computed(() => {
     return month + ' ' + day;
 });
 
+const imageIndex = ref(0);
+const nextImageIndex = ref(0);
+chooseNewImage();
+
+function chooseNewImage() {
+    if (isImageLoading.value) return;
+    nextImageIndex.value = imageIndex.value;
+    while (nextImageIndex.value === imageIndex.value) nextImageIndex.value = Math.floor(Math.random() * imageLibrary.length);
+    console.log(`Choosing new image: ${imageIndex.value} -> ${nextImageIndex.value}`);
+    isImageLoading.value = true;
+    setTimeout(() => {
+        imageIndex.value = nextImageIndex.value;
+    }, 500);
+}
+
+function onImageLoaded() {
+    console.log('Image loaded');
+    setTimeout(() => {
+        console.log(`Image transitioned: ${imageIndex.value} -> ${nextImageIndex.value}`);
+        imageIndex.value = nextImageIndex.value;
+        isImageLoading.value = false;
+    }, 1000);
+}
+
 const image = computed(() => {
-    const index = Math.floor(Math.random() * imageLibrary.length);
-    return imageLibrary[index];
+    return imageLibrary[imageIndex.value];
 });
 
 onMounted(() => {
@@ -92,6 +115,7 @@ function updateCountdown() {
 .hero {
     width: 100%;
     height: 100vh;
+    transition: background-color 1s;
 
     position: relative;
 
@@ -106,10 +130,11 @@ function updateCountdown() {
     .hero-text {
         display: flex;
         flex-direction: column;
-        padding: 2rem;
+        padding-top: 1.2rem;
 
         h2 {
-            font-size: 16rem;
+            padding: 0 1.2rem;
+            font-size: 12rem;
             font-style: bold;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
@@ -119,10 +144,13 @@ function updateCountdown() {
         }
 
         .description {
+            padding: 1.2rem;
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
             margin-top: auto;
+            transition: background-color 1s;
+
             p {
                 font-size: 2rem;
                 font-family: 'Roboto Slab', serif;
@@ -146,11 +174,11 @@ function updateCountdown() {
 
     .hero-image {
         img {
+            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-
-            transition: opacity 2s;
+            transition: top 0.5s;
         }
     }
 }
@@ -180,8 +208,16 @@ function updateCountdown() {
             text-shadow: 0.4rem 0.4rem 0 black;
             line-height: 0.9;
         }
-        > .description > p {
-            font-size: 1.6rem;
+        > .description {
+            align-items: flex-start;
+            flex-direction: column;
+            > p {
+                font-size: 2.4rem;
+                &:last-child {
+                    text-align: left;
+                    font-size: 1.6rem;
+                }
+            }
         }
     }
 }
